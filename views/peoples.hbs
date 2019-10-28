@@ -1,0 +1,11 @@
+{{#each people}}
+    <a href='{{this.id}}'>
+        <div class="peoples">
+            <img src='{{this.url}}' />
+            <div>
+                <p><b>{{this.name}}</b></p>
+                <p>{{this.about}}</p>
+            </div>
+        </div>
+    </a>
+{{/each}}

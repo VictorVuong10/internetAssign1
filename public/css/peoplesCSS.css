@@ -1,0 +1,19 @@
+.peoples {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid silver;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.peoples img {
+    display: inline-block;
+}
+.peoples div {
+    display: inline-block;
+    width: 68%
+}
+
+body {
+    background-color: aliceblue;
+}
