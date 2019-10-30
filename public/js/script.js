@@ -181,9 +181,6 @@ function flipTile(frontTile) {
 
         if(game.selectedTiles == game.tiles) {
             changeGameState();
-            if(game.wrong==-1) {
-                setTimeout(flipSelectedTiles,1000,false);   
-            }
             checkScore();
             
         }
@@ -209,6 +206,9 @@ function checkScore()
 
 
 function endGame() {
+    if(game.wrong==-1) {
+        setTimeout(flipSelectedTiles,1000,false);   
+    }
 
     document.getElementById('start').style.display = 'none';
     document.getElementById('terminate').style.display = 'none';
