@@ -21,12 +21,12 @@ app.use(bodyParser.urlencoded({ extended: false })) // middleware
 // parse application/json
 app.use(bodyParser.json()) // middleware
 
-let playerRoutes = require('./routes/peoples');
+let playerRoutes = require('./routes/player');
 
 app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/', function (req,res) {
-    res.render('home', { pageTitle: 'People App', heading: 'Welcome to People App'});
+    res.render('home', { pageTitle: 'Matrix Mem', heading: 'Greetings', parastart: 'Click Play to Start', paraterm: 'Click Terminate to End Game', start: 'Start', term: 'Terminate', homeCSS: true});
 });
 
 app.use(playerRoutes);
