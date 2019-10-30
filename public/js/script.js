@@ -195,8 +195,11 @@ function checkScore()
 {
     
     if(game.score <= 0) {
+        console.log("AAAA")
         resetBoard(false);
-        setTimeout(endGame,2000);
+        console.log("BBBBB")
+        endGame();
+        console.log("CCCCC")
     } else {
         resetBoard(true);
         setTimeout(endRound,2000);
@@ -297,9 +300,6 @@ function changeBoardSize() {
 }
 
 function resetBoard(gen) {
-    // while(board.lastChild) {
-    //     board.removeChild(board.lastChild);
-    // }
     game.selectedTiles=0;
     document.getElementById('board').remove();
     if(gen) {
