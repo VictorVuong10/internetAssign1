@@ -1,0 +1,24 @@
+<div id='homePage'>
+    <div id = 'rest'>
+        <h3>{{restart}}</h3>
+        <form id='restartForm' method='GET' action='/'>
+            <button class='sumbutt' onclick="restart()">{{rest}}</button>
+        </form>
+    </div>
+    </br>
+    <div id = 'subscore'>
+        <h3>{{subMes}}</h3>
+        <p>{{scoreMes}}</p>
+        <form id='nameform' method='POST' action='leaderboard'>
+            <input id='inputName' type='text' name="playerName" placeholder="Name">
+            </br>
+            <button class='sumbutt' onclick="submitScore()">{{submit}}</button>
+        </form>
+    </div>
+    <div id= 'boardContainer'></div>
+</div>
+
+
+
+
+

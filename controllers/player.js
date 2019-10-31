@@ -1,4 +1,4 @@
-// let peopleModel = require('../models/peopleData');
+let peopleModel = require('../models/playerData');
 
 // exports.getMatrix = (req,res,next) => {
 //   let Peoples = peopleModel.getall();
@@ -24,9 +24,18 @@
 //    res.render('peoples', { people: Peoples, peoplesCSS: true });
 // };
 
-// exports.getAddPeople = (req,res,next) => {
-//     res.render('peopleadd' ,{formsCSS: true});
-// };
+exports.leaderboard = (req,res) => {
+    
+    console.log(req.session.playerScore);
+    res.render('leaderBoard', {pageTitle:'Matrix Mem'})
+};
+
+exports.submit = (req,res) => {
+    req.session.value = req.body.playerScore
+    res.render('summary', { pageTitle: 'Matrix Mem', subMes: 'Submit Your Score', restart: 'Restart the Game', scoreMes: 'Your Score is ' + req.body.playerScore.toString(), submit: 'Submit', rest: 'Restart', summaryCSS: true});
+
+};
+
 
 // exports.getPeople = (req,res,next) => {
 //     let id = req.params.id;

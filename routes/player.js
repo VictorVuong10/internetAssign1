@@ -2,7 +2,9 @@ const express = require('express');
 const playerController = require('../controllers/player');
 const router = express.Router();
 
-// router.get('/peoples', peopleController.getAllPeople);
+router.post('/summary', playerController.submit);
+
+router.post('/leaderboard',playerController.leaderboard)
 
 // router.get('/people/add', peopleController.getAddPeople);
 
