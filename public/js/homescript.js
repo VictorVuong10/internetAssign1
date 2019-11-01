@@ -11,7 +11,7 @@ function startGame()
     game.height = 400;
     game.x = STARTSIZE;
     game.y = STARTSIZE;
-    game.tiles = 3;
+    game.tiles = 5;
     game.ready = false;
     game.terminate = false;
     document.getElementById('start').style.display = 'none';
@@ -147,6 +147,8 @@ function flipSelectedTiles(flipped) {
 
 function flipTile(frontTile) {
     if(game.ready) {
+        let audio = new Audio("sound/buttonclick.mp3");
+        audio.play();
         let tile = frontTile.parentNode;
         tile.style.webkitTransform = "rotateX(180deg)";
         game.selectedTiles++;
@@ -261,20 +263,28 @@ function endRound() {
     
      resetBoard(true);
 
-    if(((game.x == game.y && game.x == 5 && game.wrong==-1) && (game.tiles>=1 && game.wrong==1 || game.tiles>1 && game.wrong==-1))|| (Math.floor(Math.random() * 2)==0 && (game.tiles>=1 && game.wrong==1 || game.tiles>1 && game.wrong==-1))) {
-        
+
+
+    if((game.x == game.y && game.x > game.tiles && game.wrong==1) || (game.x ==game.y && game.x < game.tiles && game.wrong==-1)) {
         changeTileSize();
     } else {
-        if(game.x == game.y && game.x == 5 && game.wrong==-1) {
-
+        if(game.x == game.y && game.x == STARTSIZE && game.tiles>1 && game.wrong==-1) {
+            changeTileSize();
         } else {
-            if((game.x == game.y && game.x > game.tiles && game.wrong==1) || game.x ==game.y < game.tiles && game.wrong==-1) {
-                changeTileSize();
-            } else {
-                changeBoardSize();
-            }
+            changeBoardSize();
         }
     }
+
+    // if(((game.x == game.y && game.x == 5 && game.wrong==-1) && (game.tiles>=1 && game.wrong==1 || game.tiles>1 && game.wrong==-1))|| (Math.floor(Math.random() * 2)==0 && (game.tiles>=1 && game.wrong==1 || game.tiles>1 && game.wrong==-1))) {
+        
+    //     changeTileSize();
+    // } else {
+    //     if(game.x == game.y && game.x == 5 && game.wrong==-1) {
+
+    //     } else {
+ 
+    //     }
+    // }
     fillBoard();
     document.getElementById('currentTiles').textContent = "Tiles Left: " + (game.tiles - game.selectedTiles);
     setTimeout(startRound,2250);
