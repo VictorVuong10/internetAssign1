@@ -11,7 +11,7 @@ function startGame()
     game.height = 400;
     game.x = STARTSIZE;
     game.y = STARTSIZE;
-    game.tiles = 1;
+    game.tiles = 3;
     game.ready = false;
     game.terminate = false;
     document.getElementById('start').style.display = 'none';
