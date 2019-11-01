@@ -16,12 +16,20 @@
         <script src='js/summaryscript.js'></script>
         <link href='/css/summary.css' rel='stylesheet' />
     {{/if}}
-    {{#if formsCSS}}
-        <link href='/css/forms.css' rel='stylesheet' />
+    {{#if leaderboardCSS}}
+        <link href='/css/leaderboard.css' rel='stylesheet' />
     {{/if}}
 
 </head>
 <body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <li class="main-header__item"><a href="/">Home</a></li>
+                <li class="main-header__item"><a href="/leaderboard">Leaderboard</a></li>
+            </ul>
+        </nav>
+    </header>
     {{{ body }}}
 </body>
 </html>

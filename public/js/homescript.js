@@ -1,19 +1,17 @@
 const STARTSIZE = 5;
 
 let game = {
-    // x: number, 
-    // y:
 }
 
 
 function startGame()
 {
-    game.score = 0;
+    game.score = 10;
     game.width = 400;
     game.height = 400;
     game.x = STARTSIZE;
     game.y = STARTSIZE;
-    game.tiles = 2;
+    game.tiles = 1;
     game.ready = false;
     document.getElementById('start').style.display = 'none';
     document.getElementById('terminate').style.display = 'block';
@@ -23,9 +21,6 @@ function startGame()
     fillBoard();
 
     setTimeout(startRound,500);
-
-    // document.getElementById('board').style.width = (document.getElementById('board').offsetHeight + 1000).toString() + "px";
-
 }
 
 function genScore() {
@@ -50,7 +45,12 @@ function genScore() {
 
     score.appendChild(currentScore);
     score.appendChild(tilesLeft);
-    document.getElementById('homePage').appendChild(score);
+    document.getElementById('mainDiv').appendChild(score);
+    
+    let cont = document.createElement('div');
+    cont.setAttribute('id',"boardContainer");
+    document.getElementById('mainDiv').appendChild(cont);
+
 }
 
 function genBoard(){
@@ -66,9 +66,9 @@ function fillBoard() {
             let tile = document.createElement("div");
             let front = document.createElement("div");
             let back = document.createElement("div");
-            tile.setAttribute('class', 'thecard');
-            front.setAttribute('class', 'thefront');
-            back.setAttribute('class', 'thebackwrong');
+            tile.setAttribute('class', 'tile');
+            front.setAttribute('class', 'tileFront');
+            back.setAttribute('class', 'tileBackwrong');
 
             front.setAttribute('onClick', 'flipTile(this)')
 
@@ -92,20 +92,14 @@ function genTiles(){
         }
 
         selectedTileID[i] = curTile;
-        // console.log(selectedTileID);
-        // console.log("itme");
-        // console.log(i);
-        // console.log("enditme");
-
         selTile = document.getElementById(selectedTileID[i]);
 
-        selTile.getElementsByClassName('thebackwrong')[0].setAttribute('class', 'theback');
+        selTile.getElementsByClassName('tileBackwrong')[0].setAttribute('class', 'tileBack');
     }
     game.selectedTileID = selectedTileID;
 
 }
 
-//rotates the board and should set state of board to ready
 function startRound() {
 
     game.selectedTiles = 0;
@@ -126,9 +120,6 @@ function changeGameState() {
 }
 
 function rotateBoard(rotate) {
-    // console.log("look at me")
-    // console.log(rotate);
-    // console.log("me look at")
     switch(rotate) {
     case 1:
         document.getElementById('board').style.webkitTransform = "rotate(90deg)";
@@ -156,7 +147,6 @@ function flipSelectedTiles(flipped) {
 function flipTile(frontTile) {
     if(game.ready) {
         let tile = frontTile.parentNode;
-        // console.log(tile);
         tile.style.webkitTransform = "rotateX(180deg)";
         game.selectedTiles++;
 
@@ -185,7 +175,7 @@ function flipTile(frontTile) {
 function checkScore()
 {
     
-    if(game.score < 0) {
+    if(game.score <= 0) {
         endGame();
     } else {
         if(game.wrong==-1) {
@@ -198,49 +188,6 @@ function checkScore()
 
 }
 
-
-// function endGame() {
-//     resetBoard(false);
-
-
-//     document.getElementById('start').style.display = 'none';
-
-//     document.getElementById('score').style.display = 'none';
-    
-//     document.getElementById('terminate').style.display = 'none';
-
-//     let endScore = document.createElement('div');
-//     endScore.setAttribute('id', 'endScore')
-//     let messagep = document.createElement('h3');
-//     messagep.textContent = "Your Score is ";
-//     let scorep = document.createElement('h1');
-//     scorep.textContent = game.score;
-//     let form = document.createElement('form');
-//     form.setAttribute('id','form');
-//     form.setAttribute('method','POST');
-//     form.setAttribute('action', 'addPlayer');
-//     let inputName = document.createElement('input')
-//     inputName.setAttribute('type', 'text');
-//     inputName.setAttribute('id', 'inputName');
-//     inputName.setAttribute('name', 'playerName');
-//     inputName.setAttribute('placeholder', 'Set Name');
-//     let submitButt = document.createElement('input');
-//     submitButt.setAttribute('type', 'submit');
-//     submitButt.setAttribute('id', 'sub');
-//     submitButt.setAttribute('onClick', 'addPlayer()');
-//     submitButt.textContent = 'Set';
-//     form.appendChild(inputName);
-//     form.appendChild(submitButt);
-//     endScore.appendChild(messagep);
-//     endScore.appendChild(scorep);
-//     endScore.appendChild(form);
-//     document.getElementById('homePage').appendChild(endScore);
-//     // score.setAttribute('id',"score");
-
-    
-
-// }
-
 function endGame() {
     let form = document.createElement('form');
     form.setAttribute('id','form');
@@ -251,8 +198,7 @@ function endGame() {
     scoreInput.setAttribute('name', 'playerScore');
     scoreInput.value = game.score;
     form.appendChild(scoreInput);
-    document.getElementById('homePage').appendChild(form);
-    console.log(scoreInput.value);
+    document.getElementById('mainDiv').appendChild(form);
     form.submit();
 }
 
@@ -265,15 +211,6 @@ async function addPlayer() {
     form.appendChild(scoreInput);
 
     document.getElementById('form').submit();
-
-    console.log(document.getElementById('inputName').value);
-    // const pram={
-    //     body:document.getElementById('inputName').value,
-    //     method:"POST",
-    //     redirect: 'follow'
-    //   }
-    //   let response = await fetch('addPlayer/', pram);
-      
 
 }
 
@@ -307,8 +244,6 @@ function terminateGamePrompt() {
 
 function closePrompt() {
     
-    console.log('asd');
-    
     document.getElementById('board').style.display = 'flex';
     document.getElementById('termination').remove();
 }
@@ -324,11 +259,15 @@ function endRound() {
     
      resetBoard(true);
 
-    if((game.x == game.y && game.x == 5 && game.wrong==-1) || Math.floor(Math.random() * 2)==0) {
+    if(((game.x == game.y && game.x == 5 && game.wrong==-1) && (game.tiles>=1 && game.wrong==1 || game.tiles>1 && game.wrong==-1))|| (Math.floor(Math.random() * 2)==0 && (game.tiles>=1 && game.wrong==1 || game.tiles>1 && game.wrong==-1))) {
         
-        changeBoardSize();
+        changeTileSize();
     } else {
-        changeBoardSize();
+        if(game.x == game.y && game.x == 5 && game.wrong==-1) {
+
+        } else {
+            changeBoardSize();
+        }
     }
     fillBoard();
     document.getElementById('currentTiles').textContent = "Tiles Left: " + (game.tiles - game.selectedTiles);

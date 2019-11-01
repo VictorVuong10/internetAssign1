@@ -1,59 +1,31 @@
-let peopleModel = require('../models/playerData');
+let playerModel = require('../models/playerData');
+const uuid = require('uuid/v4');
 
-// exports.getMatrix = (req,res,next) => {
-//   let Peoples = peopleModel.getall();
-//    for(let i=0; i<Peoples.length; i++) {
-//       Peoples[i]['id'] = 'people/' + i;
-//     }
-//    res.render('peoples', { people: Peoples, peoplesCSS: true });
-// };
+exports.leaderboard = async(req,res) => {
 
-// exports.getMatrix = (req,res,next) => {
+            let id = uuid();
 
-//     let matrix;
+            await playerModel.add(id,req.body.playerName,req.session.value);
 
-//     switch(req.body.status) {
-//         case -1:
-//         break;
-//         case 1:
-//         break;
-//         default:
+            let data = await playerModel.leaderBoard();
 
-//     }
+            let player = await playerModel.get(id);
 
-//    res.render('peoples', { people: Peoples, peoplesCSS: true });
-// };
+            req.session.value = undefined;
 
-exports.leaderboard = (req,res) => {
+            res.render('leaderBoard', {rest:'Restart',rankSTR:'Rank',nameSTR:'Name',scoreSTR:'Score', pageTitle:'Matrix Mem',leaderboardCSS:true, heading:"Top 5 Scores" ,leaderBoard:'asd', player: data.rows, postPlayer: player.rows[0],post:true})
     
-    console.log(req.session.playerScore);
-    res.render('leaderBoard', {pageTitle:'Matrix Mem'})
+};
+
+exports.getleaderboard = async(req,res) => {
+    req.session.value = undefined;
+
+    let data = await playerModel.leaderBoard();
+
+    res.render('leaderBoard', {rest:'Restart',rankSTR:'Rank', nameSTR:'Name', scoreSTR:'Score', pageTitle:'Matrix Mem', player: data.rows, heading:"Top 5 Scores", leaderboardCSS:true});
 };
 
 exports.submit = (req,res) => {
-    req.session.value = req.body.playerScore
+    req.session.value = req.body.playerScore;
     res.render('summary', { pageTitle: 'Matrix Mem', subMes: 'Submit Your Score', restart: 'Restart the Game', scoreMes: 'Your Score is ' + req.body.playerScore.toString(), submit: 'Submit', rest: 'Restart', summaryCSS: true});
-
 };
-
-
-// exports.getPeople = (req,res,next) => {
-//     let id = req.params.id;
-//     let People = peopleModel.getpeople(id);
-//     res.render('people', {people: People, peopleCSS: true});
-// }
-
-// exports.postAddPeople = (req,res,next) => {
-//     let p_name = req.body.name;
-//     let p_about = req.body.about;
-//     let p_imageURL = req.body.imageURL;
- 
-//     let pOject = {
-//        name: p_name,
-//        about: p_about,
-//        url: p_imageURL
-//     }
- 
-//     peopleModel.add(pOject);
-//     res.redirect(301, '/peoples');
-// }

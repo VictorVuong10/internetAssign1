@@ -1,0 +1,41 @@
+.playerCont{
+    margin-left: auto;
+    margin-right: auto;
+    width:500px;
+    height:50px;
+    margin-bottom: 30px;
+    background-color: rgba(255,255,255,0.5);
+    font-family: 'Open Sans', sans-serif;
+    padding: 15px 10px;
+}
+
+.rank {
+    float:left;
+    margin-right: 70px;
+}
+
+.name{
+    float:left;
+    
+}
+
+#infoTag .rank {
+    margin-right:50px;
+}
+
+.score{
+    float:right;
+}
+
+#infoTag {
+    margin-left: auto;
+    margin-right: auto;
+    width:500px;
+    height:50px;
+    margin-bottom: 10px;
+    color: purple;
+}
+
+h2 {
+    color: purple;
+}

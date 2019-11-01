@@ -1,5 +1,29 @@
-<div>
+<div id = "mainDiv">
     <div>
-        <p>{{leaderBoard}}</p>
+        <div><h2>{{heading}}</h2></div>
+        <div id='infoTag'>
+            <div class='rank'><h4>{{rankSTR}}</h4></div>
+            <div class='name'><h4>{{nameSTR}}</h4></div>
+            <div class='score'><h4>{{scoreSTR}}</h4></div>
+        </div>
+        {{#each player}}
+        <div class='playerCont'>
+            <div class='rank'>{{this.rnum}}</div>
+            <div class='name'>{{this.name}}</div>
+            <div class='score'>{{this.score}}</div>
+        </div>
+        {{/each}}
+        {{#if post}}
+        <div id='postScore'>
+                <div class='playerCont'>
+                <div class='rank'>{{postPlayer.rnum}}</div>
+                <div class='name'>{{postPlayer.name}}</div>
+                <div class='score'>{{postPlayer.score}}</div>
+            </div>
+        </div>
+        {{/if}}
     </div>
+    <form id='restartForm' method='GET' action='/'>
+            <button class='sumbutt' onclick="restart()">{{rest}}</button>
+    </form>
 </div>

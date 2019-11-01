@@ -6,12 +6,6 @@ router.post('/summary', playerController.submit);
 
 router.post('/leaderboard',playerController.leaderboard)
 
-// router.get('/people/add', peopleController.getAddPeople);
 
-// router.get('/people/:id', peopleController.getPeople);
-
-// router.post('/peoples/add', peopleController.postAddPeople)
-
-// router.get('/getPlayer', playerController.getPlayer);
-
+router.get('/leaderboard',playerController.getleaderboard)
 module.exports = router;
