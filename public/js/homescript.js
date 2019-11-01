@@ -147,8 +147,6 @@ function flipSelectedTiles(flipped) {
 
 function flipTile(frontTile) {
     if(game.ready) {
-        let audio = new Audio("sound/buttonclick.mp3");
-        audio.play();
         let tile = frontTile.parentNode;
         tile.style.webkitTransform = "rotateX(180deg)";
         game.selectedTiles++;
@@ -285,6 +283,8 @@ function endRound() {
  
     //     }
     // }
+    let audio = new Audio("sound/buttonclick.mp3");
+    audio.play();
     fillBoard();
     document.getElementById('currentTiles').textContent = "Tiles Left: " + (game.tiles - game.selectedTiles);
     setTimeout(startRound,2250);
