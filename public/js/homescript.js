@@ -13,6 +13,7 @@ function startGame()
     game.y = STARTSIZE;
     game.tiles = 1;
     game.ready = false;
+    game.terminate = false;
     document.getElementById('start').style.display = 'none';
     document.getElementById('terminate').style.display = 'block';
     genScore();
@@ -216,8 +217,8 @@ async function addPlayer() {
 
 function terminateGamePrompt() {
 
-    if(game.ready) {
-        
+    if(game.ready&&!game.terminate) {
+        game.terminate = true;
         document.getElementById('board').style.display = 'none';
         let popup = document.createElement('div');
     
@@ -239,6 +240,7 @@ function terminateGamePrompt() {
         popup.appendChild(no);
 
         document.getElementById('boardContainer').appendChild(popup);
+        game.terminate = false;
     }    
 }
 
