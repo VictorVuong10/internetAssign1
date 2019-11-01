@@ -10,7 +10,7 @@
         <h3>{{subMes}}</h3>
         <p>{{scoreMes}}</p>
         <form id='nameform' method='POST' action='leaderboard'>
-            <input id='inputName' type='text' name="playerName" placeholder="Name">
+            <input id='inputName' maxlength = '12' type='text' name="playerName" placeholder="Name">
             </br>
             <button class='sumbutt' onclick="submitScore()">{{submit}}</button>
         </form>

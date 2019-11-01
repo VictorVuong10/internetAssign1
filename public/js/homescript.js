@@ -268,7 +268,11 @@ function endRound() {
         if(game.x == game.y && game.x == 5 && game.wrong==-1) {
 
         } else {
-            changeBoardSize();
+            if((game.x == game.y && game.x > game.tiles && game.wrong==1) || game.x ==game.y < game.tiles && game.wrong==-1) {
+                changeTileSize();
+            } else {
+                changeBoardSize();
+            }
         }
     }
     fillBoard();
