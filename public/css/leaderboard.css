@@ -39,3 +39,11 @@
 h2 {
     color: purple;
 }
+
+#postScore {
+    margin-top:20px;
+}
+
+#postScore p {
+    margin-bottom:10px;
+}

@@ -6,7 +6,7 @@ let game = {
 
 function startGame()
 {
-    game.score = 10;
+    game.score = 0;
     game.width = 400;
     game.height = 400;
     game.x = STARTSIZE;

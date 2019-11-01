@@ -26,7 +26,7 @@ app.use(session({
 
 let playerRoutes = require('./routes/player');
 app.get('/', function (req,res) {
-    res.render('home', { pageTitle: 'Matrix Mem', heading: 'Greetings', parastart: 'Click Play to Start', paraterm: 'Click Terminate to End Game', start: 'Start', term: 'Terminate', homeCSS: true});
+    res.render('home', { pageTitle: 'Matrix Mem', heading: 'Greetings', parastart: 'Click Play to Begin the Game', paraterm: 'Click Terminate to End Game', start: 'Play', term: 'Terminate', homeCSS: true});
 });
 
 app.use(playerRoutes);

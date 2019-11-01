@@ -22,7 +22,7 @@ exports.getleaderboard = async(req,res) => {
 
     let data = await playerModel.leaderBoard();
 
-    res.render('leaderBoard', {rest:'Restart',rankSTR:'Rank', nameSTR:'Name', scoreSTR:'Score', pageTitle:'Matrix Mem', player: data.rows, heading:"Top 5 Scores", leaderboardCSS:true});
+    res.render('leaderBoard', {yourScore:'Your Score is',rest:'Restart',rankSTR:'Rank', nameSTR:'Name', scoreSTR:'Score', pageTitle:'Matrix Mem', player: data.rows, heading:"Top 5 Scores", leaderboardCSS:true});
 };
 
 exports.submit = (req,res) => {
