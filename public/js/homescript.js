@@ -184,9 +184,16 @@ function checkScore()
             setTimeout(flipSelectedTiles,false);   
     
         }
+        setTimeout(playSound,1500);
         setTimeout(endRound,2000);
     }
 
+}
+
+function playSound() {
+    let audio = new Audio("sound/buttonclick.mp3");
+        
+    audio.play();
 }
 
 function endGame() {
@@ -216,7 +223,6 @@ async function addPlayer() {
 }
 
 function terminateGamePrompt() {
-
     if(game.ready&&!game.terminate) {
         game.terminate = true;
         document.getElementById('board').style.display = 'none';
@@ -240,7 +246,7 @@ function terminateGamePrompt() {
         popup.appendChild(no);
 
         document.getElementById('boardContainer').appendChild(popup);
-        game.terminate = false;
+        
     }    
 }
 
@@ -248,6 +254,7 @@ function closePrompt() {
     
     document.getElementById('board').style.display = 'flex';
     document.getElementById('termination').remove();
+    game.terminate = false;
 }
 
 function terminateGame() {
@@ -258,8 +265,8 @@ function terminateGame() {
 
 function endRound() {
 
-    
-     resetBoard(true);
+
+    resetBoard(true);
 
 
 
@@ -283,8 +290,7 @@ function endRound() {
  
     //     }
     // }
-    let audio = new Audio("sound/buttonclick.mp3");
-    audio.play();
+
     fillBoard();
     document.getElementById('currentTiles').textContent = "Tiles Left: " + (game.tiles - game.selectedTiles);
     setTimeout(startRound,2250);
